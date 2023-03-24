@@ -1,0 +1,13 @@
+name: GSEA_Tool
+title: GSEA_Tool
+username:
+account: eudoraleer
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7882501
+bundleId: 7000569
+url: https://eudoraleer.shinyapps.io/GSEA_Tool/
+when: 1679621376.52892
+lastSyncTime: 1679621376.52893
+asMultiple: FALSE
+asStatic: FALSE
