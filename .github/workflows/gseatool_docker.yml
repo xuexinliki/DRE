@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ShinyApps/GSEA_Tool/**
+      - Apps/GSEA_Tool/**
 
 env:
   REGISTRY: ghcr.io
