@@ -1,4 +1,4 @@
-name: cancerdb dockerization
+name: cancerdb dockering
 
 on:
   push:
