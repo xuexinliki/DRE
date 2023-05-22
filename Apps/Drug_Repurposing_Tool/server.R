@@ -270,7 +270,7 @@ function(input, output, session){
       })
     
     output$example <- renderImage({
-      cfile <- list.files("DB_Mini/", pattern = "Online_Examples", full.names = T)
+      cfile <- list.files("DB/", pattern = "Online_Examples", full.names = T)
       list(src = cfile,
            contentType = 'image/png',
            width = "100%",
