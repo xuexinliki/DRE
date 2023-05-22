@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - Apps/DSEA_Tool/**
 
 env:
   REGISTRY: ghcr.io

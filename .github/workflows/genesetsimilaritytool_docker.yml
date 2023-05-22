@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - Apps/Geneset_Similarity_Tool/**
 
 env:
   REGISTRY: ghcr.io
