@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - Apps/Drug_Repurposing_DB/DR_Defect_DB/**
 
 env:
   REGISTRY: ghcr.io
