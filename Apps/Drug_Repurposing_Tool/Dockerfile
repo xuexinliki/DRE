@@ -6,8 +6,8 @@ RUN apt-get update && \
     apt-get install -y git libxml2-dev libmagick++-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN Rscript -e 'install.packages(c("BiocManager","shiny","shinyscreenshot","ggplot2","shinydlplot","shinyjs","fgsea","shinycssloaders","plotly","DT","dplyr","devtools","ggrepel","data.table","doParallel","foreach","reshape2","Matrix","RColorBrewer","stringr"))'
-RUN Rscript -e 'BiocManager::install("fgsea","BiocParallel")'
+RUN Rscript -e 'options(install.packages.compile.from.source = "always");install.packages(c("BiocManager","shiny","shinyscreenshot","ggplot2","shinydlplot","shinyjs","fgsea","shinycssloaders","plotly","DT","dplyr","devtools","ggrepel","data.table","doParallel","foreach","reshape2","Matrix","RColorBrewer","stringr"))'
+RUN Rscript -e 'BiocManager::install(c("fgsea","BiocParallel"), ask = F)'
 
 COPY /DB/ /srv/shiny-server/drugrepurposingtool/DB 
 COPY global.R /srv/shiny-server/drugrepurposingtool/
