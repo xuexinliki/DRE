@@ -1,4 +1,4 @@
-name: atrophydb dockerization
+name: atrophydb dockering
 
 on:
   push:
