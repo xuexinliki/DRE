@@ -19,6 +19,8 @@ sudo chown -R shiny:shiny /srv/shiny-server/dseatool
 
 COPY shiny-customized.config /etc/shiny-server/shiny-server.conf
 
+ENV SHINY_LOG_STDERR=1
+
 EXPOSE 3838
 
 CMD ["/usr/bin/shiny-server"]
