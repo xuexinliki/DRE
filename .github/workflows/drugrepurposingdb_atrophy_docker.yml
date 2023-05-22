@@ -1,4 +1,4 @@
-name: atrophydb dockering 
+name: atrophydb dockering
 
 on:
   push:
