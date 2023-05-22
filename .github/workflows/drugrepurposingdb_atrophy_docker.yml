@@ -1,4 +1,4 @@
-name: atrophydb_docker
+name: drugrepurposingdb_atrophy_docker
 
 on:
   push:
