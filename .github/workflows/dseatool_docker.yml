@@ -1,4 +1,4 @@
-name: dseatool_docker
+name: dseatool_docker 
 
 on:
   push:
