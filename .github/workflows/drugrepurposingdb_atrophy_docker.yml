@@ -1,4 +1,4 @@
-name: atrophydb
+name: atrophydb docker
 
 on:
   push:
