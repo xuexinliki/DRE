@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/drurepurposingatrophy
+  IMAGE_NAME: ${{ github.repository_owner }}/atrophydb
 
 jobs:
   build-and-push-image:
