@@ -1,4 +1,4 @@
-name: degenerativedb
+name: degenerativedb dockerization
 
 on:
   push:

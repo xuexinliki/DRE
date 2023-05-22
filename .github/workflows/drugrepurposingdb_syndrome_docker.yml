@@ -1,4 +1,4 @@
-name: syndromedb
+name: syndromedb dockerization
 
 on:
   push:

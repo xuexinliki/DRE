@@ -1,4 +1,4 @@
-name: defectdb
+name: defectdb dockerization
 
 on:
   push:

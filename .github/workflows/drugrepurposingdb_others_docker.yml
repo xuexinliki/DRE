@@ -1,4 +1,4 @@
-name: othersdb
+name: othersdb dockerization
 
 on:
   push:

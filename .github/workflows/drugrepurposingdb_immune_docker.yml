@@ -1,4 +1,4 @@
-name: immunedb
+name: immunedb dockerization
 
 on:
   push:

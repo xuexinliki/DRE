@@ -1,4 +1,4 @@
-name: psychiatricdb
+name: psychiatricdb dockerization
 
 on:
   push:

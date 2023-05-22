@@ -1,4 +1,4 @@
-name: infectiondb
+name: infectiondb dockerization
 
 on:
   push:
