@@ -1,4 +1,4 @@
-name: drugrepurposingdb_atrophy_docker
+name: defectdb
 
 on:
   push:
