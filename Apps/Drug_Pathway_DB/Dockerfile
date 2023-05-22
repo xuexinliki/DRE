@@ -6,10 +6,12 @@ RUN apt-get update && \
     apt-get install -y git libxml2-dev libmagick++-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN Rscript -e 'options(install.packages.compile.from.source = "always");install.packages(c("BiocManager","shiny","plotly","tidyverse","shinycssloaders","DT","shinydlplot","shinyjs","ggplot2","RColorBrewer","reshape2","pheatmap","stringr","GGally","ggparallel","ggthemes","markdown","devtools"))'
+RUN Rscript -e 'options(install.packages.compile.from.source = "always");install.packages(c("BiocManager","shiny","plotly","tidyverse","shinycssloaders","DT","shinydlplot","shinyjs","ggplot2","RColorBrewer","reshape2","pheatmap","stringr","GGally","ggparallel","ggthemes","markdown","devtools","markdown"))'
 RUN Rscript -e 'BiocManager::install(c("fgsea"),ask = F)'
 RUN Rscript -e 'devtools::install_github(repo = "davidsjoberg/ggsankey",force = T)'
 RUN Rscript -e 'devtools::install_github(repo = "timelyportfolio/parcoords",force = T)'
+
+RUN Rscript -e 'packages <- c("BiocManager","shiny","plotly","tidyverse","shinycssloaders","DT","shinydlplot","shinyjs","ggplot2","RColorBrewer","reshape2","pheatmap","stringr","GGally","ggparallel","ggthemes","markdown","devtools","markdown","fgsea","ggsankey","parcoords"); lapply(packages, library, character.only = TRUE)'
 
 COPY /DB/ /srv/shiny-server/drugpathwaydb/DB 
 COPY global.R /srv/shiny-server/drugpathwaydb/

@@ -25,7 +25,7 @@ suppressPackageStartupMessages(library(stringr))
 
 # data --------------------------------------------------------------------
 ref <- readRDS("DB/sig_id_table_LINCS_short.rds")
-cmap <- readRDS(url("https://www.dropbox.com/s/3uacuq4n52lf1ia/Filtered_D1_short_t_matrix_12434_4690_LINCS.rds?dl=1","rb"))
+cmap <- readRDS(url("https://www.dropbox.com/s/3uacuq4n52lf1ia/?dl=1","rb"))
 row.names(cmap) <- toupper(row.names(cmap))
 compoundurl <- "https://pubchem.ncbi.nlm.nih.gov/compound/"
 organism <- readRDS("DB/Organism_Names.RDS")

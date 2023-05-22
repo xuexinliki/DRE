@@ -18,6 +18,7 @@ suppressPackageStartupMessages(library(ggparallel))
 suppressPackageStartupMessages(library(parcoords))
 suppressPackageStartupMessages(library(ggthemes))
 suppressPackageStartupMessages(library(ggsankey))
+suppressPackageStartupMessages(library(markdown))
 
 organism <- readRDS("DB/Organism_Names.RDS")
 organism <- list("Main Species" = organism[grep("Rattus|Musculus|Homo|Dresophila|Danio", organism, ignore.case = T)],
