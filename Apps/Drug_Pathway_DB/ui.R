@@ -1,4 +1,4 @@
-fluidPage(titlePanel("DRE: Drug-Pathway Exploration"),
+fluidPage(titlePanel("DRE: Drug-Pathway Database"),
           sidebarLayout(
             sidebarPanel(
            selectizeInput("organism","Type to search for an organism*", choices = organism, selected = NULL, options = list(placeholder = 'Please search and click to select an option', onInitialize = I('function() { this.setValue(""); }'))),
