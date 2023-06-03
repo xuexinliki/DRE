@@ -105,6 +105,7 @@ observeEvent(input$pathwayclass2, {
        if(input$drugname != ""){
          x <- NULL
          x <- data$db[which(data$db$Drug_Name == input$drugname & data$db$Pathway_Category == input$pathwayclass1),]
+         x <- x[which(x$FDR < 0.01),]
          print("nrow(x):")
          print(nrow(x))
          plotx <- NULL
@@ -152,8 +153,8 @@ observeEvent(input$pathwayclass2, {
       print(paste("current pathwayclass:", input$pathwayclass2))
       print(paste("current pathway:", input$pathway2))
       x <- data$db[which(data$db$Pathway_Category %in% input$pathwayclass2 & data$db$Pathway_Name == input$pathway2),]
-      x <- x[order(x$Tau, decreasing = F),]
       x <- x[which(x$FDR < 0.01),]
+      x <- x[order(x$Tau, decreasing = F),]
       x <- split(x, ifelse(x$Tau > 0, "Positive", "Negative"))
       x <- lapply(x, function(x){
         if(length(which(x$Tau > 0)) > 0){
@@ -289,7 +290,7 @@ observeEvent(input$pathwayclass2, {
              content = function(file) {write.csv(data$db, file, quote = F)})
   
   output$drugtable <- renderDataTable(
-  data$db[which(data$db$Drug_Name == input$drugname & data$db$Pathway_Category == input$pathwayclass1),which(colnames(data$db) %in% c("Pathway_Category","Pathway","Pathway_Description","Tau","ES","FDR","Pathway_PubMed","Compound_ID","LINCS_ID"))] %>% mutate_at(vars(Tau,ES,FDR), funs(signif(., 3))),
+  data$db[which(data$db$Drug_Name == input$drugname & data$db$Pathway_Category == input$pathwayclass1),which(colnames(data$db) %in% c("Pathway_Category","Pathway","Pathway_Description","LINCS_ID","Tau","ES","FDR","Pathway_PubMed","Compound_ID"))] %>% mutate_at(vars(Tau,ES,FDR), funs(signif(., 3))),
                                   filter = "top",
                                   extensions = 'Buttons',
                                   style="bootstrap",
@@ -302,7 +303,7 @@ observeEvent(input$pathwayclass2, {
   
   
   output$pathwaytable <- renderDataTable(
-    data$db[which(data$db$Pathway_Category == input$pathwayclass2),which(colnames(data$db) %in% c("Drug_Name","Mechanism","Drug_Status","Pathway_Category","Pathway","Pathway_Description","Tau","ES","FDR","Drug_Specificity","Pathway_PubMed","Compound_ID","LINCS_ID"))] %>% mutate_at(vars(Tau,ES,FDR,Drug_Specificity), funs(signif(., 3))),
+    data$db[which(data$db$Pathway_Category == input$pathwayclass2),which(colnames(data$db) %in% c("LINCS_ID","Drug_Name","Mechanism","Drug_Status","Pathway_Category","Pathway","Pathway_Description","Tau","ES","FDR","Drug_Specificity","Pathway_PubMed","Compound_ID"))] %>% mutate_at(vars(Tau,ES,FDR,Drug_Specificity), funs(signif(., 3))),
     filter = "top",
     extensions = 'Buttons',
     style="bootstrap",
