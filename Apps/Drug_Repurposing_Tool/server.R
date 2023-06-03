@@ -75,7 +75,7 @@ function(input, output, session){
         print(dim(data))
         print(head(data))
         if(nrow(data) > 2000){
-          data <- data[order(data$padj, decreasing = F),]
+          data <- data[order(data$pval, decreasing = F),]
           data <- data[1:ifelse(nrow(data) > 2000, 2000, nrow(data)),]
         }
         
@@ -192,7 +192,7 @@ function(input, output, session){
         print("After Tau:")
         print(head(data))
         data$FDR <- data$padj
-        data <- data[,c("Drug_Name","Mechanism","Drug_Status","Tau","FDR","ES","Drug_Specificity","Source_ID","PubChem_ID","LINCS_ID")]
+        data <- data[,c("LINCS_ID","Drug_Name","Mechanism","Drug_Status","Tau","FDR","ES","Drug_Specificity","Source_ID","PubChem_ID")]
         data <- data.frame(data)
         data <- data[order(data$Tau, decreasing = F),]
         data <- data.frame(Effect = ifelse(data$Tau > 0, "Postive Tau", "Negative Tau"), data)
@@ -208,13 +208,14 @@ function(input, output, session){
     
     PlotObject <- reactive({
         plotx <- data()
-        plotx <- plotx[which(plotx$padj < 0.01),]
+        plotx <- plotx[which(plotx$FDR < 0.05),]
         if(nrow(plotx) == 0){
           plotx <- data()
         }
         
         print("Plotx:")
         print(head(plotx))
+        plotx <- plotx[which(plotx$FDR < 0.01),]
         plotx <- plotx[order(plotx$FDR, decreasing = F),]
         plotx <- plotx[order(plotx$Tau, decreasing = F),]
         if(nrow(plotx) > 20){
@@ -259,13 +260,13 @@ function(input, output, session){
 
     output$table <- renderDT({
       req(input$goi)
-      data()[,which(colnames(data()) %in% c("Effect","Drug_Name","Mechanism","Drug_Status","Tau","ES","FDR","Drug_Specificity","Source_ID","PubChem_ID","LINCS_ID"))] %>% mutate_at(vars(Tau,FDR,ES,Drug_Specificity), funs(signif(., 3)))
+      data()[,which(colnames(data()) %in% c("Effect","LINCS_ID","Drug_Name","Mechanism","Drug_Status","Tau","ES","FDR","Drug_Specificity","Source_ID","PubChem_ID"))] %>% mutate_at(vars(Tau,FDR,ES,Drug_Specificity), funs(signif(., 3)))
     }, filter = "top", style="bootstrap", rownames = F, escape = FALSE, options = list(pageLength = 15))
     
     output$dltable <- downloadHandler(
       filename = function(){ paste("DRE_Drug_Repurposing_Result_",sys_time,".txt", sep = "")},
       content <- function(file){
-        x <- data()[,which(colnames(data()) %in% c("Effect","Drug_Name","Mechanism","Drug_Status","Tau","ES","FDR","Drug_Specificity","Source_ID","PubChem_ID","LINCS_ID"))]
+        x <- data()[,which(colnames(data()) %in% c("Effect","LINCS_ID","Drug_Name","Mechanism","Drug_Status","Tau","ES","FDR","Drug_Specificity","Source_ID","PubChem_ID"))]
         write.table(x,file, row.names = F, quote = F, sep = "\t")
       })
     
