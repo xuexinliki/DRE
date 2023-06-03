@@ -39,6 +39,7 @@ function(input, output, session){
     print(paste("diseases:", input$diseases))
     x <- data()$p1[which(data()$p1$Disease_Type %in% input$diseases),]
     if(nrow(x)>0){
+      x <- x[which(x$FDR < 0.05),]
       x <- x[order(x$Tau, decreasing = F),]
       x$Pathway <- gsub(".*>(.*)</a>$","\\1",x$Pathway, ignore.case = T)
       cgenes <- NULL
