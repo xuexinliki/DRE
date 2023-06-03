@@ -41,6 +41,7 @@ function(input, output, session){
     if(nrow(x)>0){
       x <- x[order(x$Tau, decreasing = F),]
       x$Pathway <- gsub(".*>(.*)</a>$","\\1",x$Pathway, ignore.case = T)
+      x <- x[which(x$FDR < 0.01),]
       cgenes <- NULL
       cgenes <- split(x, ifelse(x$Tau > 0, "Positive", "Negative"))
       cgenes <- lapply(cgenes, function(x){
