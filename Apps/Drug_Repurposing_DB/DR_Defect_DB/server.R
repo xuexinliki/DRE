@@ -21,7 +21,7 @@ function(input, output, session){
     ccols <- colorRampPalette(classcols)(length(sort(unique(db$Drug_Name))))
     names(ccols) <- gsub(".*?>(.*?)<.*","\\1",sort(unique(db$Drug_Name)))
     plotx$ccols <- ccols
-    cdiseases <- sort(unique(db$Disease_Type))
+    cdiseases <- sort(unique(db$Disease_Type[which(db$FDR < 0.01)]))
     plotx$cdiseases <- cdiseases
     cpathways <- sort(unique(db$Pathway_Category))
     plotx$cpathways <- cpathways
@@ -38,8 +38,8 @@ function(input, output, session){
     req(input$diseases)
     print(paste("diseases:", input$diseases))
     x <- data()$p1[which(data()$p1$Disease_Type %in% input$diseases),]
+    x <- x[which(x$FDR < 0.01),]
     if(nrow(x)>0){
-      x <- x[which(x$FDR < 0.01),]
       x <- x[order(x$Tau, decreasing = F),]
       x$Pathway <- gsub(".*>(.*)</a>$","\\1",x$Pathway, ignore.case = T)
       cgenes <- NULL
@@ -95,7 +95,7 @@ function(input, output, session){
              content = function(file) {write.csv(data()$p1, file, quote = F)})
   
   output$pathwaytable <- renderDataTable(
-    data()$p1[which(data()$p1$Disease_Type %in% input$diseases),] %>% mutate_at(vars(Tau,ES,FDR,Drug_Specificity), funs(signif(., 3))),
+    data()$p1[which(data()$p1$Disease_Type %in% input$diseases),c("Interaction","Disease_Category","Disease_Type","LINCS_ID","Drug_Name","Mechanism","Drug_Status","Tau","ES","FDR","Drug_Specificity","Pathway_Category","Pathway","Pathway_Description","Pathway_PubMed","Compound_ID","PubChem_ID","NegLog10FDR")] %>% mutate_at(vars(Tau,ES,FDR,Drug_Specificity), funs(signif(., 3))),
     filter = "top",
     extensions = 'Buttons',
     style="bootstrap",
