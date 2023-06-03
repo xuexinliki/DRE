@@ -208,14 +208,13 @@ function(input, output, session){
     
     PlotObject <- reactive({
         plotx <- data()
-        plotx <- plotx[which(plotx$FDR < 0.05),]
+        plotx <- plotx[which(plotx$FDR < 0.01),]
         if(nrow(plotx) == 0){
           plotx <- data()
         }
         
         print("Plotx:")
         print(head(plotx))
-        plotx <- plotx[which(plotx$FDR < 0.01),]
         plotx <- plotx[order(plotx$FDR, decreasing = F),]
         plotx <- plotx[order(plotx$Tau, decreasing = F),]
         if(nrow(plotx) > 20){
