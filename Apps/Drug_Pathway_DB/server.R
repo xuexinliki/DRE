@@ -153,6 +153,7 @@ observeEvent(input$pathwayclass2, {
       print(paste("current pathway:", input$pathway2))
       x <- data$db[which(data$db$Pathway_Category %in% input$pathwayclass2 & data$db$Pathway_Name == input$pathway2),]
       x <- x[order(x$Tau, decreasing = F),]
+      x <- x[which(x$FDR < 0.01),]
       x <- split(x, ifelse(x$Tau > 0, "Positive", "Negative"))
       x <- lapply(x, function(x){
         if(length(which(x$Tau > 0)) > 0){
