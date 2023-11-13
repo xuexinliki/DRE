@@ -29,9 +29,8 @@ groupcols <- c("#5F75A5","#91D376","#D75B58","#F5BFD3","#A8C9EA","#B09C16","#F69
 taucols <- RColorBrewer::brewer.pal(11,"RdYlBu")
 pathwayclass <- c("H", paste("C",1:8, sep = ""))
 csummary <- readRDS("DB/MSigDB_URLs.RDS")
-reflinks <- readRDS("DB/Human_Gene_Symbol_URL.RDS")
+reflinks <- readRDS("DB/Geneset_URLs.RDS")
 cmap <- readRDS(url("https://www.dropbox.com/scl/fi/vlcrq8yeaghrg3zb2nzae/D1_short_t_matrix_12434_4690_LINCS.rds?rlkey=qfioittefoe1ld1r79krbut8f&dl=1","rb"))
-
 # cmap <- readRDS("DB/D1_short_t_matrix_12434_4690_LINCS.rds")
 ref <- readRDS("DB/sig_id_table_LINCS_short.rds")
 ref$common_name <- stringr::str_to_title(ref$common_name)

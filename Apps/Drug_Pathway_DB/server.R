@@ -11,6 +11,7 @@ function(input, output, session){
         showModal(modalDialog("Reading in database..", footer=NULL))
         x <- NULL
         x <- readRDS(url(orgurl[which(orgurl$Organism == input$organism),"URL"],"rb"))
+        # x <- readRDS(paste("DB/GSEA_Result_Padj005_Tau_Abs80_Mini/",input$organism,"_GSEA_PAdj005_Tau_Abs80_Mini.RDS", sep = ""))
         x$Drug_Name <- paste(stringr::str_to_title(x$Drug_Name)," [Profile ID=",gsub("sig_","",x$Signature, ignore.case = T),"]", sep = "")
         x <- x[,which(!colnames(x) %in% c("Signature"))]
         colnames(x)[which(colnames(x) == "MSigDB_Class")] <- "Pathway_Category"
@@ -28,9 +29,10 @@ function(input, output, session){
         data$db <- x
         sigsets <- NULL
         clink <- NULL
-        clink <- reflinks[match(gsub(" ","_",input$organism, ignore.case = T), gsub(" ","_",reflinks$Species, ignore.case = T)),"URL"]
+        clink <- reflinks[match(gsub(" ","_",input$organism, ignore.case = T), gsub(" ","_",reflinks$File, ignore.case = T)),"Link"]
         clink <- gsub("dl=0","dl=1",clink)
         sigsets <- readRDS(url(clink,"rb"))
+        # sigsets <- readRDS(paste("DB/Human_Gene_Symbol/MSigDB_Species_",gsub("_"," ",input$organism, ignore.case = T),"_Human_Gene_Symbol.RDS", sep = ""))
         sigsets <- lapply(sigsets, function(x){x <- toupper(x[!is.na(x)]); x <- unique(x)})
         data$sigsets <- sigsets
         removeModal()
